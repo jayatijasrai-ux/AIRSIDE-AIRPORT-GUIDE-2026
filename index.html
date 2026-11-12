@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101d31" />
+  <meta name="description" content="An interactive airport terminal guide for finding gates, facilities, and a better way to spend your layover." />
+  <title>Airside — Airport Terminal Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Airside home"><span class="brand-mark">A</span><span>airside<span class="brand-dot">.</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation"><a class="active" href="#explore">Explore</a><a href="#flights">Flights</a><a href="#map">Terminal map</a><a href="#layover">Layover planner</a></nav>
+    <button class="saved-top" id="savedTop" aria-label="Show saved places"><span>♡</span><span class="saved-label">Saved</span><b id="savedCount">0</b></button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> YOUR AIRPORT, MADE EASIER</div>
+        <h1>A calmer way<br />to <em>make your connection.</em></h1>
+        <p>Every journey has an in-between. Make yours feel easier: get your bearings, find your departure, and discover a good place to pause while you wait.</p>
+        <div class="hero-actions"><a class="button button-light" href="#explore">Explore the terminal <span>↘</span></a><a class="hero-flight-link" href="#flights">Find a departure <span>↗</span></a></div>
+      </div>
+      <div class="hero-art" aria-label="Airport terminal with travelers and aircraft">
+        <div class="hero-image"></div><div class="hero-shade"></div>
+        <div class="flight-pill"><span class="flight-icon">✈</span><span><small>YOUR NEXT FLIGHT</small><b>Boarding in <strong id="heroCountdown">01:42</strong></b></span><span class="flight-status">ON TIME</span></div>
+        <div class="hero-caption"><span>01 — THE JOURNEY STARTS HERE</span><span>Explore beyond your gate&nbsp; ↗</span></div>
+      </div>
+      <div class="hero-index">01 <span>/</span> 04</div>
+    </section>
+
+    <section class="quick-strip" aria-label="Airport highlights"><div><span class="strip-icon">⌖</span><span><b>2 terminals</b><small>One easy guide</small></span></div><div><span class="strip-icon">◷</span><span><b>Make time yours</b><small>Plan your layover</small></span></div><div><span class="strip-icon">♡</span><span><b>Your shortlist</b><small>Save places for later</small></span></div><div class="strip-note">A LITTLE MORE <b>IN CONTROL.</b></div></section>
+
+    <section class="welcome-section section-wrap" aria-labelledby="welcomeTitle"><div class="welcome-copy"><div class="eyebrow dark-eyebrow">A BETTER START TO YOUR NEXT DEPARTURE</div><h2 id="welcomeTitle">Big airport.<br /><em>Small steps.</em></h2><p>Airports can feel like a world of their own, especially when you're watching the clock or have a few hours between flights. Airside brings the useful things together in one friendly place.</p><p>Start with your terminal, check the sample departures, then find somewhere to eat, rest, or pick up a travel essential. Save the details you want to keep close.</p><a class="text-button welcome-link" href="#flights">Start with your flight <span>↗</span></a></div><div class="welcome-journey"><div class="welcome-photo" role="img" aria-label="Sunlight across a modern airport terminal"></div><div class="journey-steps"><div><span>01</span><b>Get oriented</b><small>Choose your terminal and explore the map.</small></div><div><span>02</span><b>Find your flight</b><small>Search sample departures and save a flight.</small></div><div><span>03</span><b>Make the wait yours</b><small>Browse nearby spots and plan a calmer layover.</small></div></div></div></section>
+
+    <section class="explore-section section-wrap" id="explore">
+      <div class="section-heading"><div><div class="eyebrow dark-eyebrow">THE AIRPORT, AT YOUR PACE</div><h2>Find your next <em>favorite.</em></h2><p>Choose a terminal to see what's around you. Prices are illustrative estimates in INR; check with each outlet for current rates.</p></div><div class="terminal-picker" role="group" aria-label="Choose a terminal"><button class="terminal-option selected" data-terminal="domestic">T1 <span>Domestic</span></button><button class="terminal-option" data-terminal="international">T2 <span>International</span></button></div></div>
+      <div class="terminal-summary"><div class="terminal-summary-icon">✦</div><div><b id="terminalTitle">Terminal 1 · Domestic</b><span id="terminalDescription">A quick guide to the essentials, from check-in to your departure gate.</span></div><span class="open-label"><i></i> OPEN NOW</span></div>
+      <div class="explore-controls"><div class="category-tabs" role="tablist" aria-label="Facility categories"><button class="category-tab active" data-category="all" role="tab">Everything <span>06</span></button><button class="category-tab" data-category="food" role="tab">Eat & drink</button><button class="category-tab" data-category="rest" role="tab">Rest & recharge</button><button class="category-tab" data-category="essentials" role="tab">Essentials</button></div><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search places..." aria-label="Search facilities" /><kbd>⌘ K</kbd></label></div>
+      <div class="facility-grid" id="facilityGrid" aria-live="polite"></div>
+      <div class="empty-state" id="emptyState" hidden><span>⌕</span><b>No places found</b><p>Try another name or choose a different category.</p></div>
+      <div class="section-foot"><span id="resultCount">Showing 6 places</span><button class="text-button" id="clearFilters">Clear filters <span>↗</span></button></div>
+    </section>
+
+    <section class="flight-section" id="flights"><div class="section-wrap flight-wrap"><div class="section-heading"><div><div class="eyebrow dark-eyebrow">YOUR DEPARTURE, IN ONE PLACE</div><h2>Find your <em>flight.</em></h2><p>Search the sample departures board by flight number or destination.</p></div><button class="flight-saved-toggle" id="savedFlightsToggle">♡ Saved flights <b id="savedFlightCount">0</b></button></div>
+      <form class="flight-search" id="flightSearchForm"><label><span>FLIGHT OR DESTINATION</span><input id="flightQuery" type="search" placeholder="Try AS 204 or Mumbai" /></label><label><span>TERMINAL</span><select id="flightTerminal"><option value="all">Any terminal</option><option value="T1">T1 · Domestic</option><option value="T2">T2 · International</option></select></label><button class="button button-dark" type="submit">Search flights <span>⌕</span></button></form>
+      <div class="flight-board-heading"><span>DEPARTURES</span><span id="flightResultsLabel">Sample flight information · times shown local</span></div><div class="flight-results" id="flightResults" aria-live="polite"></div><div class="flight-empty" id="flightEmpty" hidden>No matching flights. Try another flight number or destination.</div>
+    </div></section>
+
+    <section class="map-section" id="map"><div class="section-wrap map-layout"><div class="map-intro"><div class="eyebrow">GET YOUR BEARINGS</div><h2>The terminal,<br /><em>at a glance.</em></h2><p>Tap a zone to see what's there. Your boarding gate is always the best place to start.</p><div class="map-legend"><span><i class="legend-gate"></i> Gates</span><span><i class="legend-food"></i> Food & drink</span><span><i class="legend-rest"></i> Lounges</span></div><div class="map-selection" id="mapSelection"><span class="selection-dot"></span><span><b>Start exploring</b><small>Select any zone on the map</small></span><span class="map-arrow">↗</span></div></div>
+      <div class="map-board"><div class="map-board-top"><span id="mapTerminalName">T1 · DOMESTIC DEPARTURES</span><span>SCHEMATIC MAP <i>ⓘ</i></span></div><div class="map-canvas" id="mapCanvas"><div class="map-spine"></div><div class="map-hall hall-left"><span class="hall-name">WEST CONCOURSE</span><i class="gate g1">A1</i><i class="gate g2">A2</i><i class="gate g3">A3</i><i class="gate g4">A4</i></div><div class="map-hall hall-right"><span class="hall-name">EAST CONCOURSE</span><i class="gate g5">B1</i><i class="gate g6">B2</i><i class="gate g7">B3</i><i class="gate g8">B4</i></div><button class="map-zone zone-center" data-zone="Central hub" aria-label="Central hub zone"><span>◉</span><b>Central hub</b><small>Information · Security</small></button><button class="map-zone zone-food" data-zone="Food court" aria-label="Food court zone"><span>☕</span><b>Food court</b><small>6 places</small></button><button class="map-zone zone-lounge" data-zone="Lounge zone" aria-label="Lounge zone"><span>◌</span><b>Lounge zone</b><small>2 lounges</small></button><span class="map-you"><i></i> YOU ARE HERE</span><div class="map-compass">N <span>↑</span></div></div><div class="map-board-bottom"><span>✦ &nbsp;Tap a zone to explore</span><span>Illustrative layout · not to scale</span></div></div></div></section>
+
+    <section class="layover-section section-wrap" id="layover"><div class="layover-photo"><div class="layover-photo-shade"></div><div class="photo-label">A GOOD LAYOVER IS A LITTLE ADVENTURE</div><div class="photo-bottom"><span>TAKE A BREATH. YOU'VE GOT TIME.</span><span>✦</span></div></div><div class="layover-content"><div class="eyebrow dark-eyebrow">MAKE THE WAIT WORK FOR YOU</div><h2>Your time,<br /><em>well spent.</em></h2><p>Tell us how long you have between flights. We'll sketch out a relaxed plan with time to get back to your gate.</p><div class="time-label">HOW LONG IS YOUR LAYOVER?</div><div class="time-options" role="group" aria-label="Layover duration"><button class="time-option" data-minutes="60">1 hour</button><button class="time-option selected" data-minutes="120">2 hours</button><button class="time-option" data-minutes="240">4+ hours</button></div><div class="layover-plan" id="layoverPlan"></div><a class="button button-dark" href="#explore">Explore places <span>↗</span></a><small class="layover-note">Always check your boarding time and allow enough time to return to your gate.</small></div></section>
+
+    <section class="mood-section"><div class="section-wrap mood-layout"><div class="mood-intro"><div class="eyebrow">YOUR LAYOVER, YOUR WAY</div><h2>What sounds good<br /><em>right now?</em></h2><p>Pick the mood you're in. We'll turn your waiting time into a tiny airport adventure.</p><div class="mood-buttons" role="group" aria-label="Choose your layover mood"><button class="mood-button selected" data-mood="recharge"><span>◌</span><b>Recharge</b><small>A softer landing</small></button><button class="mood-button" data-mood="refuel"><span>☕</span><b>Refuel</b><small>Something delicious</small></button><button class="mood-button" data-mood="wander"><span>✦</span><b>Wander</b><small>See what's nearby</small></button></div><div class="mood-tip"><span>✧</span><p id="moodTip">Find a quieter seat, top up your devices, and take a real pause before boarding.</p></div></div><div class="mood-card"><div class="mood-card-top"><span>YOUR MINI ADVENTURE</span><span id="moodDuration">ABOUT 35 MIN</span></div><div id="moodSuggestions" class="mood-suggestions"></div><div class="mood-card-bottom"><span>✦ &nbsp;A flexible idea, made for your layover</span><a href="#flights">Check your flight ↗</a></div></div></div></section>
+
+    <section class="closing-quote"><span class="quote-mark">“</span><p>The best part of the journey<br />might be the <em>pause.</em></p><span class="quote-credit">A LITTLE AIRSIDE WISDOM&nbsp; ✦</span></section>
+  </main>
+  <footer class="footer"><a class="brand footer-brand" href="#home"><span class="brand-mark">A</span><span>airside<span class="brand-dot">.</span></span></a><span>Make the most of your time in transit.</span><a href="#home">BACK TO TOP ↑</a></footer>
+
+  <dialog class="place-dialog" id="placeDialog"><button class="dialog-close" id="dialogClose" aria-label="Close details">×</button><div class="dialog-image" id="dialogImage"></div><div class="dialog-content"><div class="eyebrow dark-eyebrow" id="dialogCategory">PLACE DETAILS</div><h2 id="dialogTitle">Place name</h2><p id="dialogDescription"></p><div class="dialog-meta" id="dialogMeta"></div><button class="button button-dark dialog-save" id="dialogSave">♡ &nbsp; Save this place</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
